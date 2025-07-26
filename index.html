@@ -276,6 +276,7 @@
                         data: { name },
                         dataType: 'json', // 期望返回 JSON 数据
                         success: function(res, status, xhr) {
+                            console.log(res)
                             if (res) {
                                 showSuccessMessage();
                             } else {
@@ -283,6 +284,7 @@
                             }
                         },
                         error: function(xhr, status, error) {
+                            console.log(status)
                             alert('网络错误，请稍后再试');
                         },
                     });
