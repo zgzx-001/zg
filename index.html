@@ -268,13 +268,30 @@
                     storeName(name);
                     
                     // 调用API
-                    const response = await simulateApiRequest(name);
+                    // const response = await simulateApiRequest(name);
+
+                    $.ajax({
+                        url: 'https://47.120.47.44/snack_web/v1/login',
+                        method: 'POST',
+                        data: { name },
+                        dataType: 'json', // 期望返回 JSON 数据
+                        success: function(res, status, xhr) {
+                            if (res) {
+                                showSuccessMessage();
+                            } else {
+                                showErrorMessage();
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            alert('网络错误，请稍后再试');
+                        },
+                    });
                     
-                    if (response) {
-                        showSuccessMessage();
-                    } else {
-                        showErrorMessage();
-                    }
+                    // if (response) {
+                    //     showSuccessMessage();
+                    // } else {
+                    //     showErrorMessage();
+                    // }
                 } catch (error) {
                     console.error('API请求失败:', error);
                     alert('网络错误，请稍后再试');
