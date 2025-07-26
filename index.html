@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广德供电公司职工活动中心登记通</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        success: '#00B42A',
+                        danger: '#F53F3F',
+                        neutral: '#86909C',
+                        light: '#F2F3F5',
+                        dark: '#1D2129'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'card': '0 10px 30px -5px rgba(0, 0, 0, 0.1)',
+                        'button': '0 4px 14px 0 rgba(22, 93, 255, 0.4)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .transition-height {
+                transition: max-height 0.5s ease-in-out;
+            }
+            .bg-gradient-blue {
+                background: linear-gradient(135deg, #165DFF 0%, #0E42CC 100%);
+            }
+            .bg-gradient-success {
+                background: linear-gradient(135deg, #00B42A 0%, #008720 100%);
+            }
+            .bg-gradient-danger {
+                background: linear-gradient(135deg, #F53F3F 0%, #C93030 100%);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- 顶部导航 -->
+    <header class="bg-gradient-blue text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-building-o text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-bold text-shadow">广德供电公司职工活动中心</h1>
+            </div>
+<!--            <div class="hidden md:flex items-center space-x-6">-->
+<!--                <a href="#" class="hover:text-light transition-colors duration-300">首页</a>-->
+<!--                <a href="#" class="hover:text-light transition-colors duration-300">活动安排</a>-->
+<!--                <a href="#" class="hover:text-light transition-colors duration-300">设施介绍</a>-->
+<!--                <a href="#" class="hover:text-light transition-colors duration-300">联系我们</a>-->
+<!--            </div>-->
+<!--            <button class="md:hidden text-xl">-->
+<!--                <i class="fa fa-bars"></i>-->
+<!--            </button>-->
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow flex items-center justify-center p-4 md:p-8">
+        <div class="w-full max-w-md">
+            <!-- 公司logo -->
+            <div class="flex justify-center mb-8">
+                <div class="w-24 h-24 bg-primary rounded-full flex items-center justify-center shadow-lg">
+                    <i class="fa fa-power-off text-white text-5xl"></i>
+                </div>
+            </div>
+
+            <!-- 登录卡片 -->
+            <div id="login-card" class="bg-white rounded-2xl shadow-card p-8 transform transition-all duration-500 hover:shadow-lg">
+                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-center text-dark mb-6">活动中心登记通</h2>
+                
+                <!-- 成功消息 (默认隐藏) -->
+                <div id="success-message" class="hidden mb-8 text-center transform transition-all duration-500">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-success rounded-full mb-4 shadow-lg">
+                        <i class="fa fa-check text-white text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-success mb-2">进入成功</h3>
+                    <p class="text-neutral">欢迎进入职工活动中心，请遵守活动中心规定</p>
+                </div>
+                
+                <!-- 失败消息 (默认隐藏) -->
+                <div id="error-message" class="hidden mb-8 text-center transform transition-all duration-500">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-danger rounded-full mb-4 shadow-lg">
+                        <i class="fa fa-times text-white text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-danger mb-2">进入失败</h3>
+                    <p class="text-neutral">对不起！请您联系后台管理员登记后，方可进入。</p>
+                </div>
+                
+                <!-- 表单区域 -->
+                <div id="form-area" class="transform transition-all duration-500">
+                    <div class="mb-6">
+                        <label for="username" class="block text-sm font-medium text-gray-700 mb-2">请输入您的姓名</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fa fa-user text-gray-400"></i>
+                            </div>
+                            <input type="text" id="username" name="username" 
+                                class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300" 
+                                placeholder="请输入您的姓名" required>
+                        </div>
+                    </div>
+                    
+                    <button id="enter-btn" 
+                        class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg shadow-button transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2">
+                        <span id="btn-text">立即进入</span>
+                        <span id="btn-loading" class="hidden">
+                            <i class="fa fa-spinner fa-spin mr-2"></i>处理中...
+                        </span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 卡片底部 -->
+            <div class="text-center mt-6 text-neutral text-sm">
+                <p>© 2025 广德供电公司职工活动中心 版权所有</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">广德供电公司职工活动中心</p>
+                    <p class="text-xs text-gray-400">地址：安徽省宣城市广德市桃州镇爱民路1号</p>
+                </div>
+<!--                <div class="flex space-x-4">-->
+<!--                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">-->
+<!--                        <i class="fa fa-weixin text-xl"></i>-->
+<!--                    </a>-->
+<!--                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">-->
+<!--                        <i class="fa fa-phone text-xl"></i>-->
+<!--                    </a>-->
+<!--                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">-->
+<!--                        <i class="fa fa-envelope text-xl"></i>-->
+<!--                    </a>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 尝试从多种存储中获取姓名
+            function getStoredName() {
+                let name = '';
+                
+                // 按优先级尝试不同的存储方式
+                if (localStorage.getItem('employeeName')) {
+                    name = localStorage.getItem('employeeName');
+                } else if (sessionStorage.getItem('employeeName')) {
+                    name = sessionStorage.getItem('employeeName');
+                } else if (document.cookie) {
+                    const cookies = document.cookie.split('; ');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].split('=');
+                        if (cookie[0] === 'employeeName') {
+                            name = cookie[1];
+                            break;
+                        }
+                    }
+                }
+                
+                return name;
+            }
+            
+            // 存储姓名到多种存储方式
+            function storeName(name) {
+                // 存储到localStorage
+                localStorage.setItem('employeeName', name);
+                
+                // 存储到sessionStorage
+                sessionStorage.setItem('employeeName', name);
+                
+                // 存储到cookie (有效期1年)
+                const date = new Date();
+                date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
+                document.cookie = `employeeName=${name}; expires=${date.toUTCString()}; path=/`;
+            }
+            
+            // 显示成功消息
+            function showSuccessMessage() {
+                $('#form-area').addClass('opacity-0 scale-95');
+                setTimeout(() => {
+                    $('#form-area').addClass('hidden');
+                    $('#success-message').removeClass('hidden').addClass('opacity-100 scale-100');
+                }, 300);
+            }
+            
+            // 显示失败消息
+            function showErrorMessage() {
+                $('#form-area').addClass('opacity-0 scale-95');
+                setTimeout(() => {
+                    $('#form-area').addClass('hidden');
+                    $('#error-message').removeClass('hidden').addClass('opacity-100 scale-100');
+                }, 300);
+            }
+            
+            // 重置表单
+            function resetForm() {
+                $('#success-message, #error-message').addClass('hidden opacity-0 scale-95');
+                setTimeout(() => {
+                    $('#form-area').removeClass('hidden').removeClass('opacity-0 scale-95');
+                    $('#btn-text').removeClass('hidden');
+                    $('#btn-loading').addClass('hidden');
+                }, 300);
+            }
+            
+            // 模拟API请求
+            function simulateApiRequest(name) {
+                return new Promise((resolve, reject) => {
+                    // 这里应该是实际的API请求
+                    $.ajax({
+                        url: 'http://47.120.47.44/snack_web/v1/login',
+                        method: 'POST',
+                        data: { name },
+                        success: (response) => resolve(response),
+                        error: (error) => reject(error)
+                    });
+                    
+                    // // 模拟API响应
+                    // setTimeout(() => {
+                    //     // 随机成功/失败 (实际应用中应该由真实API返回)
+                    //     const isSuccess = Math.random() > 0.3;
+                    //     if (isSuccess) {
+                    //         resolve({ success: true, message: '进入成功' });
+                    //     } else {
+                    //         resolve({ success: false, message: '进入失败' });
+                    //     }
+                    // }, 1000);
+                });
+            }
+            
+            // 处理表单提交
+            $('#enter-btn').on('click', async function() {
+                const name = $('#username').val().trim();
+                
+                if (!name) {
+                    alert('请输入您的姓名');
+                    return;
+                }
+                
+                // 显示加载状态
+                $('#btn-text').addClass('hidden');
+                $('#btn-loading').removeClass('hidden');
+                
+                try {
+                    // 存储姓名
+                    storeName(name);
+                    
+                    // 调用API
+                    const response = await simulateApiRequest(name);
+                    
+                    if (response.success) {
+                        showSuccessMessage();
+                    } else {
+                        showErrorMessage();
+                    }
+                } catch (error) {
+                    console.error('API请求失败:', error);
+                    alert('网络错误，请稍后再试');
+                } finally {
+                    // 重置按钮状态
+                    setTimeout(() => {
+                        $('#btn-text').removeClass('hidden');
+                        $('#btn-loading').addClass('hidden');
+                    }, 1000);
+                }
+            });
+            
+            // 检查是否有缓存的姓名
+            const storedName = getStoredName();
+            if (storedName) {
+                $('#username').val(storedName);
+            }
+            
+            // 添加动画效果
+            $('#login-card').addClass('opacity-100 transform translate-y-0');
+        });
+    </script>
+</body>
+</html>    
