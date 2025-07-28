@@ -269,8 +269,8 @@
                     const userLon = position.coords.longitude;
 
                     // 辽宁省沈阳市和平区长白西路43号的经纬度（需要替换为实际经纬度）
-                    const targetLat = 41.7283;
-                    const targetLon = 123.4297;
+                    const targetLat = 41.727832; // 示例：长白西路43号纬度
+                    const targetLon = 123.430156; // 示例：长白西路43号经度
 
                     // 计算距离
                     const distance = getDistanceFromLatLonInM(userLat, userLon, targetLat, targetLon);
@@ -288,7 +288,7 @@
                             storeName(name);
 
                             $.ajax({
-                                url: '/snack_web/v1/login',
+                                url: 'https://47.120.47.44/snack_web/v1/login',
                                 method: 'POST',
                                 data: { name },
                                 dataType: 'json', // 期望返回 JSON 格式
