@@ -53,285 +53,289 @@
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
-    <!-- 顶部导航 -->
-    <header class="bg-gradient-blue text-white shadow-md">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <i class="fa fa-building-o text-2xl"></i>
-                <h1 class="text-xl md:text-2xl font-bold text-shadow">广德供电公司职工活动中心</h1>
-            </div>
-<!--            <div class="hidden md:flex items-center space-x-6">-->
-<!--                <a href="#" class="hover:text-light transition-colors duration-300">首页</a>-->
-<!--                <a href="#" class="hover:text-light transition-colors duration-300">活动安排</a>-->
-<!--                <a href="#" class="hover:text-light transition-colors duration-300">设施介绍</a>-->
-<!--                <a href="#" class="hover:text-light transition-colors duration-300">联系我们</a>-->
-<!--            </div>-->
-<!--            <button class="md:hidden text-xl">-->
-<!--                <i class="fa fa-bars"></i>-->
-<!--            </button>-->
-        </div>
-    </header>
-
-    <!-- 主内容区 -->
-    <main class="flex-grow flex items-center justify-center p-4 md:p-8">
-        <div class="w-full max-w-md">
-            <!-- 公司logo -->
-            <div class="flex justify-center mb-8">
-                <div class="w-24 h-24 bg-primary rounded-full flex items-center justify-center shadow-lg">
-                    <i class="fa fa-power-off text-white text-5xl"></i>
-                </div>
-            </div>
-
-            <!-- 登录卡片 -->
-            <div id="login-card" class="bg-white rounded-2xl shadow-card p-8 transform transition-all duration-500 hover:shadow-lg">
-                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-center text-dark mb-6">活动中心登记通</h2>
-                
-                <!-- 成功消息 (默认隐藏) -->
-                <div id="success-message" class="hidden mb-8 text-center transform transition-all duration-500">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-success rounded-full mb-4 shadow-lg">
-                        <i class="fa fa-check text-white text-4xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-success mb-2">进入成功</h3>
-                    <p class="text-neutral">欢迎进入职工活动中心，请遵守活动中心规定</p>
-                </div>
-                
-                <!-- 失败消息 (默认隐藏) -->
-                <div id="error-message" class="hidden mb-8 text-center transform transition-all duration-500">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-danger rounded-full mb-4 shadow-lg">
-                        <i class="fa fa-times text-white text-4xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-danger mb-2">进入失败</h3>
-                    <p class="text-neutral">对不起！请您联系后台管理员登记后，方可进入。</p>
-                </div>
-                
-                <!-- 表单区域 -->
-                <div id="form-area" class="transform transition-all duration-500">
-                    <div class="mb-6">
-                        <label for="username" class="block text-sm font-medium text-gray-700 mb-2">请输入您的姓名</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fa fa-user text-gray-400"></i>
-                            </div>
-                            <input type="text" id="username" name="username" 
-                                class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300" 
-                                placeholder="请输入您的姓名" required>
-                        </div>
-                    </div>
-                    
-                    <button id="enter-btn" 
-                        class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg shadow-button transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2">
-                        <span id="btn-text">立即进入</span>
-                        <span id="btn-loading" class="hidden">
-                            <i class="fa fa-spinner fa-spin mr-2"></i>处理中...
-                        </span>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- 卡片底部 -->
-            <div class="text-center mt-6 text-neutral text-sm">
-                <p>© 2025 广德供电公司职工活动中心 版权所有</p>
-            </div>
-        </div>
-    </main>
-
-    <!-- 页脚 -->
-    <footer class="bg-dark text-white py-6">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <p class="text-sm">广德供电公司职工活动中心</p>
-                </div>
-<!--                <div class="flex space-x-4">-->
-<!--                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">-->
-<!--                        <i class="fa fa-weixin text-xl"></i>-->
-<!--                    </a>-->
-<!--                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">-->
-<!--                        <i class="fa fa-phone text-xl"></i>-->
-<!--                    </a>-->
-<!--                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">-->
-<!--                        <i class="fa fa-envelope text-xl"></i>-->
-<!--                    </a>-->
-<!--                </div>-->
-            </div>
-        </div>
-    </footer>
-
-    <div id="loading" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white p-6 rounded-lg shadow-xl flex items-center">
-            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mr-4"></div>
-            <span class="text-gray-700">加载中...</span>
+<!-- 顶部导航 -->
+<header class="bg-gradient-blue text-white shadow-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <i class="fa fa-building-o text-2xl"></i>
+            <h1 class="text-xl md:text-2xl font-bold text-shadow">广德供电公司职工活动中心</h1>
         </div>
     </div>
+</header>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        function showLoading() {
-            const loading = document.getElementById('loading');
-            loading.classList.remove('opacity-0', 'pointer-events-none');
-        }
+<!-- 主内容区 -->
+<main class="flex-grow flex items-center justify-center p-4 md:p-8">
+    <div class="w-full max-w-md">
+        <!-- 公司logo -->
+        <div class="flex justify-center mb-8">
+            <div class="w-24 h-24 bg-primary rounded-full flex items-center justify-center shadow-lg">
+                <i class="fa fa-power-off text-white text-5xl"></i>
+            </div>
+        </div>
 
-        function hideLoading() {
-            const loading = document.getElementById('loading');
-            loading.classList.add('opacity-0', 'pointer-events-none');
-        }
+        <!-- 登录卡片 -->
+        <div id="login-card" class="bg-white rounded-2xl shadow-card p-8 transform transition-all duration-500 hover:shadow-lg">
+            <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-center text-dark mb-6">活动中心登记通</h2>
 
-        $(document).ready(function() {
-            // 尝试从多种存储中获取姓名
-            function getStoredName() {
-                let name = '';
-                
-                // 按优先级尝试不同的存储方式
-                if (localStorage.getItem('employeeName')) {
-                    name = localStorage.getItem('employeeName');
-                } else if (sessionStorage.getItem('employeeName')) {
-                    name = sessionStorage.getItem('employeeName');
-                } else if (document.cookie) {
-                    const cookies = document.cookie.split('; ');
-                    for (let i = 0; i < cookies.length; i++) {
-                        const cookie = cookies[i].split('=');
-                        if (cookie[0] === 'employeeName') {
-                            name = cookie[1];
-                            break;
-                        }
+            <!-- 成功消息 (默认隐藏) -->
+            <div id="success-message" class="hidden mb-8 text-center transform transition-all duration-500">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-success rounded-full mb-4 shadow-lg">
+                    <i class="fa fa-check text-white text-4xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-success mb-2 oooo">进入成功</h3>
+                <p class="text-neutral">欢迎进入职工活动中心，请遵守活动规定</p>
+            </div>
+
+            <!-- 失败消息 (默认隐藏) -->
+            <div id="error-message" class="hidden mb-8 text-center transform transition-all duration-500">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-danger rounded-full mb-4 shadow-lg">
+                    <i class="fa fa-times text-white text-4xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-danger mb-2">进入失败</h3>
+                <p class="text-neutral">对不起！请您联系后台管理员登记后，方可进入。</p>
+            </div>
+
+            <!-- 表单区域 -->
+            <div id="form-area" class="transform transition-all duration-500">
+                <div class="mb-6">
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-2">请输入您的姓名</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fa fa-user text-gray-400"></i>
+                        </div>
+                        <input type="text" id="username" name="username"
+                               class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+                               placeholder="请输入您的姓名" required>
+                    </div>
+                </div>
+
+                <button id="enter-btn"
+                        class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg shadow-button transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2">
+                    <span id="btn-text">立即进入</span>
+                    <span id="btn-loading" class="hidden">
+                            <i class="fa fa-spinner fa-spin mr-2"></i>处理中...
+                        </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 卡片底部 -->
+        <div class="text-center mt-6 text-neutral text-sm">
+            <p>© 2025 广德供电公司职工活动中心 版权所有</p>
+        </div>
+    </div>
+</main>
+
+<!-- 页脚 -->
+<footer class="bg-dark text-white py-6">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <p class="text-sm">广德供电公司职工活动中心</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div id="loading" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-white p-6 rounded-lg shadow-xl flex items-center">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mr-4"></div>
+        <span class="text-gray-700">加载中...</span>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function showLoading() {
+        const loading = document.getElementById('loading');
+        loading.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function hideLoading() {
+        const loading = document.getElementById('loading');
+        loading.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    // 计算两个经纬度之间的距离（单位：米）
+    function getDistanceFromLatLonInM(lat1, lon1, lat2, lon2) {
+        const R = 6371e3; // 地球半径，单位：米
+        const dLat = deg2rad(lat2 - lat1);
+        const dLon = deg2rad(lon2 - lon1);
+        const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
+    }
+
+    function deg2rad(deg) {
+        return deg * (Math.PI / 180);
+    }
+
+    $(document).ready(function() {
+        // 尝试从多种存储中获取姓名
+        function getStoredName() {
+            let name = '';
+
+            // 按优先级尝试不同的存储方式
+            if (localStorage.getItem('employeeName')) {
+                name = localStorage.getItem('employeeName');
+            } else if (sessionStorage.getItem('employeeName')) {
+                name = sessionStorage.getItem('employeeName');
+            } else if (document.cookie) {
+                const cookies = document.cookie.split('; ');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].split('=');
+                    if (cookie[0] === 'employeeName') {
+                        name = cookie[1];
+                        break;
                     }
                 }
-                
-                return name;
             }
-            
-            // 存储姓名到多种存储方式
-            function storeName(name) {
-                // 存储到localStorage
-                localStorage.setItem('employeeName', name);
-                
-                // 存储到sessionStorage
-                sessionStorage.setItem('employeeName', name);
-                
-                // 存储到cookie (有效期1年)
-                const date = new Date();
-                date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
-                document.cookie = `employeeName=${name}; expires=${date.toUTCString()}; path=/`;
-            }
-            
-            // 显示成功消息
-            function showSuccessMessage() {
-                $('#form-area').addClass('opacity-0 scale-95');
-                setTimeout(() => {
-                    $('#form-area').addClass('hidden');
-                    $('#success-message').removeClass('hidden').addClass('opacity-100 scale-100');
-                }, 300);
-            }
-            
-            // 显示失败消息
-            function showErrorMessage() {
-                $('#form-area').addClass('opacity-0 scale-95');
-                setTimeout(() => {
-                    $('#form-area').addClass('hidden');
-                    $('#error-message').removeClass('hidden').addClass('opacity-100 scale-100');
-                }, 300);
-            }
-            
-            // 重置表单
-            function resetForm() {
-                $('#success-message, #error-message').addClass('hidden opacity-0 scale-95');
-                setTimeout(() => {
-                    $('#form-area').removeClass('hidden').removeClass('opacity-0 scale-95');
-                    $('#btn-text').removeClass('hidden');
-                    $('#btn-loading').addClass('hidden');
-                }, 300);
-            }
-            
-            // 模拟API请求
-            function simulateApiRequest(name) {
-                return new Promise((resolve, reject) => {
-                    // 这里应该是实际的API请求
-                    $.ajax({
-                        url: 'https://47.120.47.44/snack_web/v1/login',
-                        method: 'POST',
-                        data: { name },
-                        success: (response) => resolve(response),
-                        error: (error) => reject(error)
-                    });
-                    
-                    // // 模拟API响应
-                    // setTimeout(() => {
-                    //     // 随机成功/失败 (实际应用中应该由真实API返回)
-                    //     const isSuccess = Math.random() > 0.3;
-                    //     if (isSuccess) {
-                    //         resolve({ success: true, message: '进入成功' });
-                    //     } else {
-                    //         resolve({ success: false, message: '进入失败' });
-                    //     }
-                    // }, 1000);
-                });
-            }
-            
-            // 处理表单提交
-            $('#enter-btn').on('click', async function() {
-                const name = $('#username').val().trim();
-                
-                if (!name) {
-                    alert('请输入您的姓名');
-                    return;
-                }
-                
-                // 显示加载状态
-                $('#btn-text').addClass('hidden');
-                $('#btn-loading').removeClass('hidden');
-                
-                try {
-                    // 存储姓名
-                    storeName(name);
-                    
-                    // 调用API
-                    // const response = await simulateApiRequest(name);
 
-                    $.ajax({
-                        url: 'https://47.120.47.44/snack_web/v1/login',
-                        method: 'POST',
-                        data: { name },
-                        dataType: 'json', // 期望返回 JSON 格式
-                        beforeSend: function() {
-                            showLoading(); // 显示加载状态
-                        },
-                        success: function(res, status, xhr) {
-                            showSuccessMessage();
-                        },
-                        error: function(xhr, status, error) {
-                            showErrorMessage();
-                        },
-                        complete: function() {
-                            hideLoading(); // 隐藏加载状态
-                        }
-                    });
-                    
-                    // if (response) {
-                    //     showSuccessMessage();
-                    // } else {
-                    //     showErrorMessage();
-                    // }
-                } catch (error) {
-                    console.error('API请求失败:', error);
-                    alert('网络错误，请稍后再试');
-                } finally {
-                    // 重置按钮状态
-                    setTimeout(() => {
-                        $('#btn-text').removeClass('hidden');
-                        $('#btn-loading').addClass('hidden');
-                    }, 1000);
-                }
+            return name;
+        }
+
+        // 存储姓名到多种存储方式
+        function storeName(name) {
+            // 存储到localStorage
+            localStorage.setItem('employeeName', name);
+
+            // 存储到sessionStorage
+            sessionStorage.setItem('employeeName', name);
+
+            // 存储到cookie (有效期1年)
+            const date = new Date();
+            date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
+            document.cookie = `employeeName=${name}; expires=${date.toUTCString()}; path=/`;
+        }
+
+        // 显示成功消息
+        function showSuccessMessage() {
+            $('#form-area').addClass('opacity-0 scale-95');
+            setTimeout(() => {
+                $('#form-area').addClass('hidden');
+                $('#success-message').removeClass('hidden').addClass('opacity-100 scale-100');
+            }, 300);
+        }
+
+        // 显示失败消息
+        function showErrorMessage() {
+            $('#form-area').addClass('opacity-0 scale-95');
+            setTimeout(() => {
+                $('#form-area').addClass('hidden');
+                $('#error-message').removeClass('hidden').addClass('opacity-100 scale-100');
+            }, 300);
+        }
+
+        // 重置表单
+        function resetForm() {
+            $('#success-message, #error-message').addClass('hidden opacity-0 scale-95');
+            setTimeout(() => {
+                $('#form-area').removeClass('hidden').removeClass('opacity-0 scale-95');
+                $('#btn-text').removeClass('hidden');
+                $('#btn-loading').addClass('hidden');
+            }, 300);
+        }
+
+        // 模拟API请求
+        function simulateApiRequest(name) {
+            return new Promise((resolve, reject) => {
+                // 这里应该是实际的API请求
+                $.ajax({
+                    url: 'https://47.120.47.44/snack_web/v1/login',
+                    method: 'POST',
+                    data: { name },
+                    success: (response) => resolve(response),
+                    error: (error) => reject(error)
+                });
             });
-            
-            // 检查是否有缓存的姓名
-            const storedName = getStoredName();
-            if (storedName) {
-                $('#username').val(storedName);
+        }
+
+        // 处理表单提交
+        $('#enter-btn').on('click', async function() {
+            const name = $('#username').val().trim();
+
+            if (!name) {
+                alert('请输入您的姓名');
+                return;
             }
-            
-            // 添加动画效果
-            $('#login-card').addClass('opacity-100 transform translate-y-0');
+
+            // 获取用户位置
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const userLat = position.coords.latitude;
+                    const userLon = position.coords.longitude;
+
+                    // 辽宁省沈阳市和平区长白西路43号的经纬度（需要替换为实际经纬度）
+                    const targetLat = 41.7283;
+                    const targetLon = 123.4297;
+
+                    // 计算距离
+                    const distance = getDistanceFromLatLonInM(userLat, userLon, targetLat, targetLon);
+
+                    // 设置允许的最大距离（单位：米）
+                    const maxDistance = 100;
+
+                    if (distance <= maxDistance) {
+                        // 显示加载状态
+                        $('#btn-text').addClass('hidden');
+                        $('#btn-loading').removeClass('hidden');
+
+                        try {
+                            // 存储姓名
+                            storeName(name);
+
+                            $.ajax({
+                                url: '/snack_web/v1/login',
+                                method: 'POST',
+                                data: { name },
+                                dataType: 'json', // 期望返回 JSON 格式
+                                beforeSend: function() {
+                                    showLoading(); // 显示加载状态
+                                },
+                                success: function(res, status, xhr) {
+                                    $(".oooo").html(name + "进入成功");
+                                    showSuccessMessage();
+                                },
+                                error: function(xhr, status, error) {
+                                    showErrorMessage();
+                                },
+                                complete: function() {
+                                    hideLoading(); // 隐藏加载状态
+                                }
+                            });
+                        } catch (error) {
+                            console.error('API请求失败:', error);
+                            alert('网络错误，请稍后再试');
+                        } finally {
+                            // 重置按钮状态
+                            setTimeout(() => {
+                                $('#btn-text').removeClass('hidden');
+                                $('#btn-loading').addClass('hidden');
+                            }, 1000);
+                        }
+                    } else {
+                        alert('您不在指定范围内，无法提交表单。');
+                    }
+                }, function(error) {
+                    alert('无法获取您的位置信息，请检查您的设置。');
+                });
+            } else {
+                alert('您的浏览器不支持地理位置功能。');
+            }
         });
-    </script>
+
+        // 检查是否有缓存的姓名
+        const storedName = getStoredName();
+        if (storedName) {
+            $('#username').val(storedName);
+        }
+
+        // 添加动画效果
+        $('#login-card').addClass('opacity-100 transform translate-y-0');
+    });
+</script>
 </body>
-</html>    
+</html>
