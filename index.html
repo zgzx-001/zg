@@ -268,14 +268,18 @@
                     const userLat = position.coords.latitude;
                     const userLon = position.coords.longitude;
 
-                    const targetLat = 41.727832;
-                    const targetLon = 123.430156;
+                    // 辽宁省沈阳市和平区长白西路43号的经纬度（需要替换为实际经纬度）
+                    // const targetLat = 41.7283;
+                    // const targetLon = 123.4297;
+                    const targetLat = 41.750111; // 示例：长白西路43号纬度
+                    const targetLon = 123.388919; // 示例：长白西路43号经度
 
+                    alert(userLat + `*` + userLon)
                     // 计算距离
                     const distance = getDistanceFromLatLonInM(userLat, userLon, targetLat, targetLon);
 
                     // 设置允许的最大距离（单位：米）
-                    const maxDistance = 100;
+                    const maxDistance = 2000;
 
                     if (distance <= maxDistance) {
                         // 显示加载状态
@@ -287,7 +291,7 @@
                             storeName(name);
 
                             $.ajax({
-                                url: 'https://47.120.47.44/snack_web/v1/login',
+                                url: '/snack_web/v1/login',
                                 method: 'POST',
                                 data: { name },
                                 dataType: 'json', // 期望返回 JSON 格式
@@ -316,7 +320,7 @@
                             }, 1000);
                         }
                     } else {
-                        alert('您不在指定范围内，无法提交表单。');
+                        alert('您不在指定范围内，无法提交表单。' + distance + '----' + maxDistance);
                     }
                 }, function(error) {
                     alert('无法获取您的位置信息，请检查您的设置。');
